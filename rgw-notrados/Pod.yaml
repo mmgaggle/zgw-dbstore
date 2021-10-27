@@ -6,8 +6,14 @@ spec:
   containers:
   - name: rgw-notrados
     image: rgw-notrados:latest
-    command: ['radosgw']
-    args: ['','']
+    command: ['/bin/entrypoint.sh']
     ports:
     - containerPort: 80
     restartPolicy: OnFailure
+    resources:
+      requests:
+        cpu: "1"
+        mem: "1Gi"
+      limits:
+        cpu: "1"
+        mem: "1Gi"
