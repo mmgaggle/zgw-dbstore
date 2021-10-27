@@ -1,9 +1,8 @@
-FROM centos:centos8
+FROM quay.io/ceph/daemon:latest-master-devel
 USER root
 
-RUN dnf install -y bzip2
-RUN curl -O http://rht-sbu.s3.amazonaws.com/notrados.tar.bz2 
-RUN tar xvjf notrados.tar.bz2
-COPY entrypoint.sh /bin/entrypoint.sh
 
-
+RUN pip3 install s3cmd 
+COPY warp /bin/
+COPY entrypoint.sh /opt/ceph-container/bin/
+COPY ceph.conf /etc/ceph/ceph.conf
