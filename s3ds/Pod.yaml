@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: s3d
+spec:
+  containers:
+  - name: s3d
+    image: s3d:latest
+    command: ['/bin/entrypoint.sh']
+    ports:
+    - containerPort: 80
+    restartPolicy: OnFailure

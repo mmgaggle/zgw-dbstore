@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: warp
+spec:
+  containers:
+  - name: warp
+    image: warp:latest
+    command: ['warp']
+    args: ['client']
+    ports:
+    - containerPort: 7761
+    restartPolicy: OnFailure
