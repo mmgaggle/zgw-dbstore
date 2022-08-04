@@ -1,10 +1,11 @@
-# Building zgw:dbstore container
+# Getting started with zgw:dbstore
+## Building zgw:dbstore container
 
 ```
 podman build -t rgw-dbstore ./
 ```
 
-# Running zgw:dbstore container
+## Running zgw:dbstore container
 
 Set environmental variables if you want to override the default set of
 credentials for the `zippy` user.
@@ -16,15 +17,15 @@ podman run -it rgw-dbstore:latest \
   -e SECRET_KEY=$SECRET_KEY
 ```
 
-## Playing with zgw:dbstore
+# Playing with zgw:dbstore
 
-# Enter zgw container
+## Enter zgw container
 
 ```
 podman exec -it <container id> /bin/bash
 ```
 
-# Using s5cmd
+## Using s5cmd
 
 The container entrypoint sets up credentials for s5cmd, you still need to pass
 the endpoint.
@@ -33,7 +34,7 @@ the endpoint.
 s5cmd --endpoint-url http://127.0.0.1:7480 mb s3://warp-benchmark
 ```
 
-# Run warp benchmark
+## Run warp benchmark
 ```
 warp put --host 127.0.0.1:7480 \
          --access-key zippy \
