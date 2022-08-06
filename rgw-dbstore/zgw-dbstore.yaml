@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zgw-dbstore
+  labels:
+    app: zgw-dbstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zgw-dbstore
+  template:
+    metadata:
+      labels:
+        app: zgw-dbstore
+    spec:
+      containers:
+      - name: zgw-dbstore
+        image: quay.io/mmgaggle/zgw-tools:latest
+        ports:
+        - containerPort: 7480
+        resources:
+          requests:
+            cpu: "1"
+            memory: "1Gi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: s3
+spec:
+  selector:
+    app.kubernetes.io/name: zgw-dbstore
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 7480

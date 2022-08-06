@@ -9,6 +9,5 @@ RUN mv s5cmd /bin/
 RUN mv warp /bin/
 RUN mkdir -p /root/.aws
 
-COPY mb.py /bin/
 COPY entrypoint.sh /opt/ceph-container/bin/
 COPY ceph.conf /etc/ceph/ceph.conf
