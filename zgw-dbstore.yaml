@@ -1,4 +1,15 @@
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zgw-user
+  labels:
+    app: zgw-dbstore
+  type: Opaque
+  data:
+    SECRET_KEY: emlwcHk=
+    ACCESS_KEY: emlwcHk=
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,6 +38,19 @@ spec:
           limits:
             cpu: "1"
             memory: "1Gi"
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zgw-user
+                key: secret-key
+                optional: false
+          - name: ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zgw-user
+                key: access-key
+                optional: false
 ---
 apiVersion: v1
 kind: Service

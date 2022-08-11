@@ -6,8 +6,8 @@ to implement a layering API based on stackable modules/drivers, similar to Unix
 filesystems (VFS). Sans RADOS, the rgw is the /zgw/.
 
 This repository is intended to provide tooling to build container images for
-the Ceph object gateway with the dbstore store driver, and provide configs to
-run it in a Kubernetes cluster.
+the Ceph object gateway with the dbstore store driver, which persists objects
+and metadata in a sqlite database.
 
 ## Using a pre-built container in kubernetes
 
