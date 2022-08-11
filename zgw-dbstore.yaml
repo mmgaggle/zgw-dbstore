@@ -14,7 +14,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: zgw-dbstore-pvc
   labels:
-    app: zgw-dbstore
+    app.kubernetes.io/name: zgw-dbstore
 spec:
   accessModes:
     - ReadWriteOnce
@@ -32,11 +32,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: zgw-dbstore
+      app.kubernetes.io/name: zgw-dbstore
   template:
     metadata:
       labels:
-        app: zgw-dbstore
+        app.kubernetes.io/name: zgw-dbstore
     spec:
       volumes:
         - name: zgw-dbstore-pvc
@@ -60,13 +60,13 @@ spec:
         env:
           - name: COMPONENT
             value: zgw-dbstore
-          - name: SECRET_KEY
+          - name: AWS_SECRET_KEY
             valueFrom:
               secretKeyRef:
                 name: zgw-user
                 key: SECRET_KEY
                 optional: false
-          - name: ACCESS_KEY
+          - name: AWS_ACCESS_KEY
             valueFrom:
               secretKeyRef:
                 name: zgw-user

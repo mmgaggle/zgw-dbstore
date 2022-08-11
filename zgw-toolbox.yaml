@@ -21,13 +21,13 @@ spec:
         env:
           - name: COMPONENT
             value: zgw-toolbox
-          - name: SECRET_KEY
+          - name: AWS_SECRET_KEY
             valueFrom:
               secretKeyRef:
                 name: zgw-user
                 key: SECRET_KEY
                 optional: false
-          - name: ACCESS_KEY
+          - name: AWS_ACCESS_KEY
             valueFrom:
               secretKeyRef:
                 name: zgw-user
