@@ -5,10 +5,22 @@ metadata:
   name: zgw-user
   labels:
     app: zgw-dbstore
-  type: Opaque
-  data:
-    SECRET_KEY: emlwcHk=
-    ACCESS_KEY: emlwcHk=
+data:
+  SECRET_KEY: emlwcHk=
+  ACCESS_KEY: emlwcHk=
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zgw-dbstore-pvc
+  labels:
+    app: zgw-dbstore
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -26,6 +38,10 @@ spec:
       labels:
         app: zgw-dbstore
     spec:
+      volumes:
+        - name: zgw-dbstore-pvc
+          persistentVolumeClaim:
+            claimName: zgw-dbstore-pvc
       containers:
       - name: zgw-dbstore
         image: quay.io/mmgaggle/zgw-tools:latest
@@ -38,18 +54,21 @@ spec:
           limits:
             cpu: "1"
             memory: "1Gi"
+        volumeMounts:
+          - mountPath: "/var/lib/ceph/rgw"
+            name: zgw-dbstore-pvc
         env:
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
                 name: zgw-user
-                key: secret-key
+                key: SECRET_KEY
                 optional: false
           - name: ACCESS_KEY
             valueFrom:
               secretKeyRef:
                 name: zgw-user
-                key: access-key
+                key: ACCESS_KEY
                 optional: false
 ---
 apiVersion: v1
