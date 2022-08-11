@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zgw-toolbox
+  labels:
+    app.kubernetes.io/name: zgw-toolbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zgw-toolbox
+  template:
+    metadata:
+      labels:
+        app: zgw-toolbox
+    spec:
+      containers:
+      - name: zgw-toolbox
+        image: quay.io/mmgaggle/zgw-tools:latest
+        env:
+          - name: COMPONENT
+            value: zgw-toolbox
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zgw-user
+                key: SECRET_KEY
+                optional: false
+          - name: ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zgw-user
+                key: ACCESS_KEY
+                optional: false
+          - name: WARP_HOST
+            value: s3.default.svc.cluster.local
+          - name: WARP_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zgw-user
+                key: SECRET_KEY
+                optional: false
+          - name: WARP_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zgw-user
+                key: ACCESS_KEY
+                optional: false

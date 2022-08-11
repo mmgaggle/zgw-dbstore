@@ -4,7 +4,7 @@ kind: Secret
 metadata:
   name: zgw-user
   labels:
-    app: zgw-dbstore
+    app.kubernetes.io/name: zgw-dbstore
 data:
   SECRET_KEY: emlwcHk=
   ACCESS_KEY: emlwcHk=
@@ -44,7 +44,7 @@ spec:
             claimName: zgw-dbstore-pvc
       containers:
       - name: zgw-dbstore
-        image: quay.io/mmgaggle/zgw-tools:latest
+        image: quay.io/mmgaggle/zgw-dbstore:latest
         ports:
         - containerPort: 7480
         resources:
@@ -58,6 +58,8 @@ spec:
           - mountPath: "/var/lib/ceph/rgw"
             name: zgw-dbstore-pvc
         env:
+          - name: COMPONENT
+            value: zgw-dbstore
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:

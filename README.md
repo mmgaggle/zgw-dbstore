@@ -35,10 +35,16 @@ podman run -it rgw-dbstore:latest \
 
 # Playing with zgw:dbstore
 
+## Create zgw-toolbox
+
+```
+kubectl apply -f zgw-toolbox.yaml
+```
+
 ## Enter zgw pod
 
 ```
-kubectl rsh po zgw-dbstore
+kubectl exec --stdin --tty <TOOLBOX POD ID> -- /bin/bash
 ```
 
 ## Enter zgw container
@@ -49,11 +55,10 @@ podman exec -it <container id> /bin/bash
 
 ## Using s5cmd
 
-The container entrypoint sets up credentials for s5cmd, you still need to pass
-the endpoint.
+The container entrypoint sets up credentials for s5cmd.
 
 ```
-s5cmd --endpoint-url http://127.0.0.1:7480 mb s3://warp-benchmark
+s5cmd mb s3://warp-benchmark
 ```
 
 ## Run warp benchmark
