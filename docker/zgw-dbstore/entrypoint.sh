@@ -1,10 +1,8 @@
 #!/bin/bash
 set -e
 
-cat << EOF > /root/.aws/credentials
+cat << EOF > /root/.aws/config
 [default]
-aws_access_key_id = ${ACCESS_KEY:-zippy}
-aws_secret_access_key = ${SECRET_KEY:-zippy}
 addressing_style = path
 EOF
 
