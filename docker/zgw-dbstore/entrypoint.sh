@@ -1,15 +1,6 @@
 #!/bin/bash
 set -e
 
-cat << EOF > /root/.aws/config
-[default]
-addressing_style = path
-EOF
-
-cat << EOF > /root/.bashrc
-alias s5cmd='s5cmd --endpoint-url http://s3.default.svc.cluster.local'
-EOF
-
 if [ ${COMPONENT} == "zgw-dbstore" ]
 then
   # need to test if user already exists
@@ -19,12 +10,10 @@ then
     --access-key ${ACCESS_KEY:-zippy} \
     --secret-key ${SECRET_KEY:-zippy}
 
-  cd /var/lib/ceph
-
   /usr/bin/radosgw \
     --cluster ceph \
-    --setuser root \
-    --setgroup root \
+    --setuser $(id -u) \
+    --setgroup $(id -g) \
     --default-log-to-stderr=true \
     --err-to-stderr=true \
     --default-log-to-file=false \

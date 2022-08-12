@@ -10,6 +10,25 @@ data:
   ACCESS_KEY: emlwcHk=
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zgw-dbstore-cm
+  labels:
+    app.kubernetes.io/name: zgw-dbstore
+data:
+  ceph.conf: |
+    [client]
+    rgw backend store = dbstore
+    dbstore db dir = /var/lib/ceph/radosgw
+    dbstore db name prefix = dbstore
+    debug rgw = 20
+  config: |
+    [default]
+    addressing_style = path
+  bashrc: |
+    alias s5cmd="s5cmd --endpoint-url http://s3.default.svc.cluster.local"
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: zgw-dbstore-pvc
@@ -38,6 +57,10 @@ spec:
       labels:
         app.kubernetes.io/name: zgw-dbstore
     spec:
+      securityContext:
+        runAsUser: 167
+        runAsGroup: 167
+        fsGroup: 167
       volumes:
         - name: zgw-dbstore-pvc
           persistentVolumeClaim:
@@ -55,7 +78,7 @@ spec:
             cpu: "1"
             memory: "1Gi"
         volumeMounts:
-          - mountPath: "/var/lib/ceph/rgw"
+          - mountPath: "/var/lib/ceph/radosgw"
             name: zgw-dbstore-pvc
         env:
           - name: COMPONENT
