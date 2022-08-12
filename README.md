@@ -8,7 +8,7 @@ short. [RADOS](https://ceph.com/assets/pdfs/weil-rados-pdsw07.pdf) is Ceph's
 native object storage system. Sans RADOS, the radosgw is the /zgw/.
 
 This was made possible by the Zipper initiative, which introduced a layering API
-based on stackable modules/driver, similar to Unix filesystems (VFS). The
+based on stackable modules/drivers, similar to Unix filesystems (VFS). The
 reference store driver for Zipper is dbstore, but others exist as well:
 
 * [DBstore](https://github.com/ceph/ceph/tree/main/src/rgw/store/dbstore) - Reference implementation
