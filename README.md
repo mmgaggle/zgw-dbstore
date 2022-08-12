@@ -17,8 +17,7 @@ reference store driver for Zipper is dbstore, but others exist as well:
 * [sfs](https://github.com/aquarist-labs/ceph/tree/s3gw/src/rgw/store/sfs) for [SUSE s3gw](https://github.com/aquarist-labs/s3gw-tools/)
 
 This repository is intended to provide tooling to build container images for
-the Ceph object gateway with the dbstore store driver, which persists objects
-and metadata in a sqlite database.
+the Ceph object gateway with the dbstore store driver.
 
 # Getting Started
 
