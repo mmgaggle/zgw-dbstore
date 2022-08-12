@@ -1,24 +1,30 @@
-# Z is for zipper
+# Z is for zipper, a S3 gateway
 
-The Ceph object gateway (radosgw or rgw), provides a S3 server dialect and
-persists objects in Ceph's native object store (RADOS). Zipper was the initative
-to implement a layering API based on stackable modules/drivers, similar to Unix
-filesystems (VFS). Sans RADOS, the rgw is the /zgw/.
+zgw-dbstore is a light weight S3 server dialect based on the Ceph object
+gateway that persists objects and metadata into a SQLite database.
+
+The Ceph object gateway has conventionally has been the radosgw, or rgw for short.
+Sans RADOS, the rgw is the /zgw/.
+
+This was made possible by the Zipper initiative, which introduced a layering API
+based on stackable modules/driver, similar to Unix filesystems (VFS). Other
+store drivers are starting to be developed:
+
+* DBstore
+* [CORTX](https://github.com/Seagate/cortx) [cortx-rgw](https://github.com/Seagate/cortx-rgw)
+* [DAOS](https://github.com/daos-stack/daos) [daos](https://github.com/ceph/ceph/pull/45888)
+* [s3gw](https://github.com/aquarist-labs/s3gw-tools/) [sfs](https://github.com/aquarist-labs/ceph/tree/s3gw/src/rgw/store/sfs)
 
 This repository is intended to provide tooling to build container images for
 the Ceph object gateway with the dbstore store driver, which persists objects
 and metadata in a sqlite database.
 
-## Using a pre-built container in kubernetes
+# Getting Started
+
+## Running zgw-dbstore with Kubernetes
 
 ```
 kubectl apply -f zgw-dbstore.yaml
-```
-
-## Building zgw:dbstore container
-
-```
-docker build -t rgw-dbstore docker/zgw-dbstore
 ```
 
 ## Running zgw-dbstore with docker
@@ -33,24 +39,23 @@ podman run -it rgw-dbstore:latest \
   -e SECRET_KEY=$SECRET_KEY
 ```
 
-# Playing with zgw:dbstore
+# Toolbox
 
-## Create zgw-toolbox
+The toolbox includes pre-configured CLI tools to interact with zgw-dbstore:
+
+* s5cmd: blazing fast s3 client
+* warp: s3 benchmarking
+
+## Running the toolbox in Kubernetes
 
 ```
 kubectl apply -f zgw-toolbox.yaml
 ```
 
-## Enter zgw pod
+## Enter zgw-toolbox pod
 
 ```
 kubectl exec --stdin --tty <TOOLBOX POD ID> -- /bin/bash
-```
-
-## Enter zgw container
-
-```
-podman exec -it <container id> /bin/bash
 ```
 
 ## Using s5cmd
@@ -67,4 +72,12 @@ warp put --host 127.0.0.1:7480 \
          --access-key zippy \
          --secret-key zippy \
          --duration 10s
+```
+
+# Building containers
+
+## Building zgw:dbstore container
+
+```
+docker build -t rgw-dbstore docker/zgw-dbstore
 ```
