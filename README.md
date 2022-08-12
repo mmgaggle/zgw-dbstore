@@ -1,4 +1,4 @@
-# Z is for zipper, a S3 gateway
+# Z is for zipper: S3 gateway
 
 zgw-dbstore is a light weight S3 server dialect based on the Ceph object
 gateway that persists objects and metadata into a SQLite database.
