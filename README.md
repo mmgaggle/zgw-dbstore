@@ -1,7 +1,9 @@
 # Z is for zipper: S3 gateway
 
 zgw-dbstore is a light weight S3 server dialect based on the Ceph object
-gateway that persists objects and metadata into a SQLite database.
+gateway that persists objects and metadata into a SQLite database. If you've
+ever wanted to use Ceph's object gateway, without deploying a cluster, this is
+for you!
 
 The Ceph object gateway has conventionally carried the name radosgw, or rgw for
 short. [RADOS](https://ceph.com/assets/pdfs/weil-rados-pdsw07.pdf) is Ceph's
