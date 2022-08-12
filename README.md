@@ -11,9 +11,9 @@ based on stackable modules/driver, similar to Unix filesystems (VFS). Other
 store drivers are starting to be developed:
 
 * DBstore
-* [CORTX](https://github.com/Seagate/cortx) [cortx-rgw](https://github.com/Seagate/cortx-rgw)
-* [DAOS](https://github.com/daos-stack/daos) [daos](https://github.com/ceph/ceph/pull/45888)
-* [s3gw](https://github.com/aquarist-labs/s3gw-tools/) [sfs](https://github.com/aquarist-labs/ceph/tree/s3gw/src/rgw/store/sfs)
+* [cortx-rgw](https://github.com/Seagate/cortx-rgw) for [CORTX](https://github.com/Seagate/cortx)
+* [daos](https://github.com/ceph/ceph/pull/45888) for [DAOS](https://github.com/daos-stack/daos)
+* [sfs](https://github.com/aquarist-labs/ceph/tree/s3gw/src/rgw/store/sfs) for [s3gw](https://github.com/aquarist-labs/s3gw-tools/)
 
 This repository is intended to provide tooling to build container images for
 the Ceph object gateway with the dbstore store driver, which persists objects
