@@ -8,8 +8,8 @@ The Ceph object gateway has conventionally has been the radosgw, or rgw for shor
 Sans RADOS, the radosgw is the /zgw/.
 
 This was made possible by the Zipper initiative, which introduced a layering API
-based on stackable modules/driver, similar to Unix filesystems (VFS). Other
-store drivers are starting to be developed:
+based on stackable modules/driver, similar to Unix filesystems (VFS). The
+reference store driver for Zipper is dbstore, but others exist as well:
 
 * DBstore
 * [cortx-rgw](https://github.com/Seagate/cortx-rgw) for [CORTX](https://github.com/Seagate/cortx)
