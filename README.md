@@ -4,7 +4,8 @@ zgw-dbstore is a light weight S3 server dialect based on the Ceph object
 gateway that persists objects and metadata into a SQLite database.
 
 The Ceph object gateway has conventionally has been the radosgw, or rgw for short.
-Sans RADOS, the rgw is the /zgw/.
+[RADOS](https://ceph.com/assets/pdfs/weil-rados-pdsw07.pdf) is Ceph's native object storage system.
+Sans RADOS, the radosgw is the /zgw/.
 
 This was made possible by the Zipper initiative, which introduced a layering API
 based on stackable modules/driver, similar to Unix filesystems (VFS). Other
