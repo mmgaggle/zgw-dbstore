@@ -11,7 +11,7 @@ This was made possible by the Zipper initiative, which introduced a layering API
 based on stackable modules/driver, similar to Unix filesystems (VFS). The
 reference store driver for Zipper is dbstore, but others exist as well:
 
-* DBstore
+* [DBstore](https://github.com/ceph/ceph/tree/main/src/rgw/store/dbstore) - Reference implementation
 * [cortx-rgw](https://github.com/Seagate/cortx-rgw) for [CORTX](https://github.com/Seagate/cortx)
 * [daos](https://github.com/ceph/ceph/pull/45888) for [DAOS](https://github.com/daos-stack/daos)
 * [sfs](https://github.com/aquarist-labs/ceph/tree/s3gw/src/rgw/store/sfs) for [s3gw](https://github.com/aquarist-labs/s3gw-tools/)
