@@ -12,9 +12,9 @@ based on stackable modules/driver, similar to Unix filesystems (VFS). The
 reference store driver for Zipper is dbstore, but others exist as well:
 
 * [DBstore](https://github.com/ceph/ceph/tree/main/src/rgw/store/dbstore) - Reference implementation
-* [cortx-rgw](https://github.com/Seagate/cortx-rgw) for [CORTX](https://github.com/Seagate/cortx)
-* [daos](https://github.com/ceph/ceph/pull/45888) for [DAOS](https://github.com/daos-stack/daos)
-* [sfs](https://github.com/aquarist-labs/ceph/tree/s3gw/src/rgw/store/sfs) for [s3gw](https://github.com/aquarist-labs/s3gw-tools/)
+* [cortx-rgw](https://github.com/Seagate/cortx-rgw) for [Seagate CORTX](https://github.com/Seagate/cortx)
+* [daos](https://github.com/ceph/ceph/pull/45888) for [Intel DAOS](https://github.com/daos-stack/daos)
+* [sfs](https://github.com/aquarist-labs/ceph/tree/s3gw/src/rgw/store/sfs) for [SUSE s3gw](https://github.com/aquarist-labs/s3gw-tools/)
 
 This repository is intended to provide tooling to build container images for
 the Ceph object gateway with the dbstore store driver, which persists objects
