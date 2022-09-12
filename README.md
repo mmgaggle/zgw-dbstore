@@ -21,7 +21,7 @@ of store drivers SALs exist already:
 This repository is intended to provide tooling to build container images for
 the Ceph object gateway with the dbstore store driver.
 
-# Running zgw-dbstore with Kubernetes
+# minikube zgw-dbstore
 
 ## Create zgw-dbstore resources
 
@@ -74,7 +74,7 @@ warp put --host s3.default.svc.cluster.local:80 \
 docker build -t rgw-dbstore docker/zgw-dbstore
 ```
 
-# Running zgw-dbstore with docker
+# podman zgw-dbstore
 
 Set environmental variables if you want to override the default set of
 credentials for the `zippy` user.
