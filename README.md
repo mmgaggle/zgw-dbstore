@@ -83,5 +83,5 @@ podman run -it rgw-dbstore:latest \
 ## Building zgw:dbstore container
 
 ```
-docker build -t rgw-dbstore docker/zgw-dbstore
+docker build -t zgw-dbstore docker/zgw-dbstore
 ```
