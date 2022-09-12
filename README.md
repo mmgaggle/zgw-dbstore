@@ -55,7 +55,28 @@ The container entrypoint sets up credentials for s5cmd.
 
 ```
 s5cmd --endpoint-url http://s3.default.svc.cluster.local \
-  mb s3://warp-benchmark
+  mb s3://mybucket
+```
+
+Grab some sample data and upload it.
+
+```
+cd /tmp
+curl -LO https://d37ci6vzurychx.cloudfront.net/misc/taxi+_zone_lookup.csv
+s5cmd --endpoint-url http://s3.default.svc.cluster.local \
+  cp taxi+_zone_lookup.csv s3://mybucket
+```
+
+## Query sample CSV object with S3 Select
+```
+aws s3api select-object-content \
+  --endpoint-url http://s3.default.svc.cluster.local \
+  --bucket 'mybucket' \
+  --key 'taxi+_zone_lookup.csv' \
+  --expression "SELECT * FROM S3Object s where s._2='\"Brooklyn\"'" \
+  --expression-type 'SQL' \
+  --input-serialization '{"CSV": {"FieldDelimiter": ",","RecordDelimiter": "\n" ,  "FileHeaderInfo": "IGNORE" }}' \
+  --output-serialization '{"CSV": {"FieldDelimiter": ":"}}' /dev/stdout
 ```
 
 ## Run warp benchmark
