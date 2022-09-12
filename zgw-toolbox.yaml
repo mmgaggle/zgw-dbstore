@@ -17,17 +17,17 @@ spec:
     spec:
       containers:
       - name: zgw-toolbox
-        image: quay.io/mmgaggle/zgw-tools:latest
+        image: quay.io/mmgaggle/zgw-dbstore:latest
         env:
           - name: COMPONENT
             value: zgw-toolbox
-          - name: AWS_SECRET_KEY
+          - name: AWS_SECRET_ACCESS_KEY
             valueFrom:
               secretKeyRef:
                 name: zgw-user
                 key: SECRET_KEY
                 optional: false
-          - name: AWS_ACCESS_KEY
+          - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
                 name: zgw-user

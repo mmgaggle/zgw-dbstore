@@ -15,7 +15,7 @@ of store drivers SALs exist already:
 
 * [DBstore](https://github.com/ceph/ceph/tree/main/src/rgw/store/dbstore) - Reference implementation
 * [cortx-rgw](https://github.com/Seagate/cortx-rgw) for [Seagate CORTX](https://github.com/Seagate/cortx)
-* [daos](https://github.com/ceph/ceph/pull/45888) for [Intel DAOS](https://github.com/daos-stack/daos)
+* [daos](https://github.com/ceph/ceph/pull/47709) for [Intel DAOS](https://github.com/daos-stack/daos)
 * [sfs](https://github.com/aquarist-labs/ceph/tree/s3gw/src/rgw/store/sfs) for [SUSE s3gw](https://github.com/aquarist-labs/s3gw-tools/)
 
 This repository is intended to provide tooling to build container images for
@@ -66,14 +66,6 @@ warp put --host s3.default.svc.cluster.local:80 \
   --duration 15s
 ```
 
-# Building containers
-
-## Building zgw:dbstore container
-
-```
-docker build -t rgw-dbstore docker/zgw-dbstore
-```
-
 # podman zgw-dbstore
 
 Set environmental variables if you want to override the default set of
@@ -84,4 +76,12 @@ podman run -it rgw-dbstore:latest \
   -v /mnt:/var/lib/ceph \
   -e ACCESS_KEY=$AWS_ACCESS_KEY \
   -e SECRET_KEY=$AWS_SECRET_KEY
+```
+
+# Building containers
+
+## Building zgw:dbstore container
+
+```
+docker build -t rgw-dbstore docker/zgw-dbstore
 ```
