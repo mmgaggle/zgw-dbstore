@@ -70,13 +70,6 @@ spec:
         image: quay.io/mmgaggle/zgw-dbstore:latest
         ports:
         - containerPort: 7480
-        resources:
-          requests:
-            cpu: "1"
-            memory: "1Gi"
-          limits:
-            cpu: "1"
-            memory: "1Gi"
         volumeMounts:
           - mountPath: "/var/lib/ceph/radosgw"
             name: zgw-dbstore-pvc

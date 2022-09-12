@@ -21,15 +21,60 @@ of store drivers SALs exist already:
 This repository is intended to provide tooling to build container images for
 the Ceph object gateway with the dbstore store driver.
 
-# Getting Started
+# Running zgw-dbstore with Kubernetes
 
-## Running zgw-dbstore with Kubernetes
+## Create zgw-dbstore resources
 
 ```
 kubectl apply -f zgw-dbstore.yaml
 ```
 
-## Running zgw-dbstore with docker
+## Create toolbox resources
+
+The toolbox includes pre-configured CLI tools to interact with zgw-dbstore:
+
+* s5cmd: blazing fast s3 client
+* warp: s3 benchmarking utility
+
+To create a toolbox pod, use:
+
+```
+kubectl apply -f zgw-toolbox.yaml
+```
+
+## Enter zgw-toolbox pod
+
+```
+TOOLBOX_ID=$(kubectl get po | grep toolbox | awk '{print $1}')
+kubectl exec --stdin --tty ${TOOLBOX_ID} -- /bin/bash
+```
+
+## Using s5cmd
+
+The container entrypoint sets up credentials for s5cmd.
+
+```
+s5cmd --endpoint-url http://s3.default.svc.cluster.local \
+  mb s3://warp-benchmark
+```
+
+## Run warp benchmark
+```
+warp put --host s3.default.svc.cluster.local:80 \
+  --access-key zippy \
+  --secret-key zippy \
+  --duration 15s
+```
+
+# Building containers
+
+## Building zgw:dbstore container
+
+```
+docker build -t rgw-dbstore docker/zgw-dbstore
+```
+
+# Running zgw-dbstore with docker
 
 Set environmental variables if you want to override the default set of
 credentials for the `zippy` user.
@@ -39,47 +84,4 @@ podman run -it rgw-dbstore:latest \
   -v /mnt:/var/lib/ceph \
   -e ACCESS_KEY=$AWS_ACCESS_KEY \
   -e SECRET_KEY=$AWS_SECRET_KEY
-```
-
-# Toolbox
-
-The toolbox includes pre-configured CLI tools to interact with zgw-dbstore:
-
-* s5cmd: blazing fast s3 client
-* warp: s3 benchmarking utility
-
-## Running the toolbox in Kubernetes
-
-```
-kubectl apply -f zgw-toolbox.yaml
-```
-
-## Enter zgw-toolbox pod
-
-```
-kubectl exec --stdin --tty <TOOLBOX POD ID> -- /bin/bash
-```
-
-## Using s5cmd
-
-The container entrypoint sets up credentials for s5cmd.
-
-```
-s5cmd mb s3://warp-benchmark
-```
-
-## Run warp benchmark
-```
-warp put --host 127.0.0.1:7480 \
-         --access-key zippy \
-         --secret-key zippy \
-         --duration 10s
-```
-
-# Building containers
-
-## Building zgw:dbstore container
-
-```
-docker build -t rgw-dbstore docker/zgw-dbstore
 ```
