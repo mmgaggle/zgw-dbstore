@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if [ ${COMPONENT} == "zgw-dbstore" ]
+if [ "${COMPONENT}" == "zgw-dbstore" ]
 then
   # need to test if user already exists
   radosgw-admin user create \
@@ -20,7 +20,7 @@ then
     --foreground \
     -n client.rgw \
     --no-mon-config
-elif [ ${COMPONENT} == "zgw-toolbox" ]
+elif [ "${COMPONENT}" == "zgw-toolbox" ]
 then
   sleep infinity
 fi
