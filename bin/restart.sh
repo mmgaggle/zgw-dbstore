@@ -5,8 +5,8 @@ run_zgw () {
            --user 167:167 \
            -p 7480:7480 \
            -e COMPONENT=zgw-dbstore \
-           -e ACCESS_KEY=${ACCESS_KEY} \
-           -e SECRET_KEY=${SECRET_KEY} \
+           -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+           -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
            -dt quay.io/mmgaggle/zgw-dbstore:latest
 }
 

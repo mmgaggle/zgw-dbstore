@@ -7,8 +7,8 @@ then
   radosgw-admin user create \
     --uid zippy \
     --display-name zippy \
-    --access-key ${ACCESS_KEY:-zippy} \
-    --secret-key ${SECRET_KEY:-zippy}
+    --access-key ${AWS_ACCESS_KEY_ID:-zippy} \
+    --secret-key ${AWS_SECRET_ACCESS_KEY:-zippy}
 
   /usr/bin/radosgw \
     --cluster ceph \
